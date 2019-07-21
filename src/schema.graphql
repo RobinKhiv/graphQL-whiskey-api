@@ -1,0 +1,38 @@
+type Query {
+  user(query: String): [User!]!
+  user_list: WhiskeyList!
+  whiskey: Whiskey!
+  comment: [Comment!]
+}
+type User {
+  id: ID!
+  user_name: String!
+  full_name: String!
+  nickname: String
+  password: String!
+}
+type Whiskey {
+  id: ID!
+  whiskey_name: String!
+  image: String!
+  origin: String
+  abv: Int 
+  price: Float
+  content: String
+  nose: String
+  palate: String
+  finish: String
+  user: User!
+  comment: [Comment!]!
+}
+type Comment {
+  id: ID!
+  rating: Int!
+  tasting: String!
+  whiskey: Whiskey!
+}
+type WhiskeyList {
+  favorite: [Whiskey!]!
+  wish: [Whiskey!]!
+  tried: [Whiskey!]!
+}

@@ -7,15 +7,48 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+// const { buildSchema } = require('graphql');
 
 const app = express();
 
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+// const schema = buildSchema(`type Query {
+//   user(query: String): [User!]!
+//   user_list: WhiskeyList!
+//   whiskey: Whiskey!
+//   comment: [Comment!]
+// }
+// type User {
+//   id: ID!
+//   user_name: String!
+//   full_name: String!
+//   nickname: String
+//   password: String!
+// }
+// type Whiskey {
+//   id: ID!
+//   whiskey_name: String!
+//   image: String!
+//   origin: String
+//   abv: Int 
+//   price: Float
+//   content: String
+//   nose: String
+//   palate: String
+//   finish: String
+//   user: User!
+//   comment: [Comment!]!
+// }
+// type Comment {
+//   id: ID!
+//   rating: Int!
+//   tasting: String!
+//   whiskey: Whiskey!
+// }
+// type WhiskeyList {
+//   favorite: [Whiskey!]!
+//   wish: [Whiskey!]!
+//   tried: [Whiskey!]!
+// }`);
 
 const root = {
   hello: () => {
@@ -31,7 +64,7 @@ app.use(morgan(morganOption));
 app.use(cors());
 app.use(helmet());
 app.use('/graphql', graphqlHTTP({
-  schema: schema,
+  schema: './schema.graphql',
   rootValue: root,
   graphiql: true,
 }));
